@@ -1,6 +1,6 @@
 package guru.springframework.msscbeerservice.services.order;
 
-import guru.sfg.brewery.model.events.ValidateBeerOrderRequest;
+import guru.sfg.brewery.model.events.ValidateOrderRequest;
 import guru.sfg.brewery.model.events.ValidateOrderResult;
 import guru.springframework.msscbeerservice.config.JmsConfig;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +16,13 @@ public class BeerOrderValidationListener {
     private final JmsTemplate jmsTemplate;
 
     @JmsListener(destination = JmsConfig.VALIDATE_ORDER_QUEUE)
-    private void listen(ValidateBeerOrderRequest validateBeerOrderRequest) {
-        Boolean isValid = validator.validateOrder(validateBeerOrderRequest.getBeerOrderDto());
+    private void listen(ValidateOrderRequest validateBeerOrderRequest) {
+        Boolean isValid = validator.validateOrder(validateBeerOrderRequest.getBeerOrder());
 
         jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_RESPONSE_QUEUE,
                 ValidateOrderResult.builder()
                     .isValid(isValid)
-                    .orderId(validateBeerOrderRequest.getBeerOrderDto().getId())
+                    .orderId(validateBeerOrderRequest.getBeerOrder().getId())
                     .build());
     }
 }

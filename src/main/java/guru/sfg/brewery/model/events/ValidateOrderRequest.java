@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ValidateBeerOrderRequest {
+public class ValidateOrderRequest {
 
-    private BeerOrderDto beerOrderDto;
+    private BeerOrderDto beerOrder;
 }
 
 
