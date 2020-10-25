@@ -17,7 +17,7 @@ services:
       - 8761:8761
 
   config:
-    image: sfgbeerworks/sfg-brewery-config
+    image: saleco/mssc-config-server
     ports:
       - 8888:8888
     depends_on:
